@@ -1,0 +1,9 @@
+{
+    "id" : "AdvancedBehaviors",
+    "version" : "0.1.0-SNAPSHOT",
+    "author" : "nihal111",
+    "displayName" : "AdvancedBehaviors",
+    "description" : "",
+    "dependencies" : [],
+    "serverSideOnly" : false
+}
