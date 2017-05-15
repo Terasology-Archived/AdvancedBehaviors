@@ -13,10 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.advancedBehaviors.FleeOnHit;
+package org.terasology.advancedBehaviors.Flee;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.terasology.advancedBehaviors.FleeOnHit.FleeOnHitComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.logic.behavior.tree.Node;
@@ -42,8 +43,8 @@ public class CheckFleeStopNode extends Node {
         }
 
         public Status update(float dt) {
-            FleeOnHitComponent fleeOnHitComponent = this.actor().getComponent(FleeOnHitComponent.class);
-            EntityRef instigator = fleeOnHitComponent.instigator;
+            FleeComponent fleeComponent = this.actor().getComponent(FleeComponent.class);
+            EntityRef instigator = fleeComponent.instigator;
             if (instigator == null || !instigator.isActive()) {
                 return Status.FAILURE;
             }
@@ -59,13 +60,13 @@ public class CheckFleeStopNode extends Node {
             Vector3f selfLocation = targetLocation.getWorldPosition();
             float currentDistanceSquared = selfLocation.distanceSquared(instigatorLocation);
 
-            float minDistance = fleeOnHitComponent.minDistance;
+            float minDistance = fleeComponent.minDistance;
             float minDistanceSquared = minDistance * minDistance;
 
             // Triggers an updateBehaviorEvent for the entity when it reaches a safe distance from flee instigator
             if (currentDistanceSquared >= minDistanceSquared) {
-                fleeOnHitComponent.instigator = null;
-                this.actor().getEntity().saveComponent(fleeOnHitComponent);
+                fleeComponent.instigator = null;
+                this.actor().getEntity().saveComponent(fleeComponent);
                 this.actor().getEntity().send(new UpdateBehaviorEvent());
                 return Status.FAILURE;
             } else {

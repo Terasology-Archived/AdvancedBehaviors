@@ -18,6 +18,7 @@ package org.terasology.advancedBehaviors.FleeInProximity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.advancedBehaviors.FindNearbyPlayers.FindNearbyPlayersComponent;
+import org.terasology.advancedBehaviors.Flee.FleeComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.Time;
@@ -47,11 +48,12 @@ public class FleeInProximitySystem extends BaseComponentSystem {
         if (findNearbyPlayersComponent.charactersWithinRange != null && findNearbyPlayersComponent.charactersWithinRange.size() > 0) {
             event.consume();
             EntityRef someCharacterWithinRange = findNearbyPlayersComponent.charactersWithinRange.get(0);
-            fleeInProximityComponent.nearbyPlayer = someCharacterWithinRange;
-            entity.saveComponent(fleeInProximityComponent);
+            FleeComponent fleeComponent = new FleeComponent();
+            fleeComponent.instigator = someCharacterWithinRange;
+            entity.addOrSaveComponent(fleeComponent);
             // Start hostile behavior, when an entity enters nearby
             BehaviorComponent behaviorComponent = entity.getComponent(BehaviorComponent.class);
-            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:fleeInProximity", BehaviorTree.class).get();
+            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:flee", BehaviorTree.class).get();
             logger.info("Changed behavior to Flee");
             // Increase speed by multiplier factor
             CharacterMovementComponent characterMovementComponent = entity.getComponent(CharacterMovementComponent.class);
@@ -59,8 +61,9 @@ public class FleeInProximitySystem extends BaseComponentSystem {
             entity.saveComponent(characterMovementComponent);
             entity.saveComponent(behaviorComponent);
         } else {
-            fleeInProximityComponent.nearbyPlayer = null;
-            entity.saveComponent(fleeInProximityComponent);
+            if (entity.hasComponent(FleeComponent.class)) {
+                entity.removeComponent(FleeComponent.class);
+            }
         }
     }
 }

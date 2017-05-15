@@ -17,6 +17,7 @@ package org.terasology.advancedBehaviors.FleeOnHit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.terasology.advancedBehaviors.Flee.FleeComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.Time;
@@ -46,21 +47,22 @@ public class FleeOnHitSystem extends BaseComponentSystem {
      */
     @ReceiveEvent(components = FleeOnHitComponent.class)
     public void onDamage(OnDamagedEvent event, EntityRef entity, FleeOnHitComponent fleeOnHitComponent) {
-        fleeOnHitComponent.instigator = event.getInstigator();
-        fleeOnHitComponent.timeWhenHit = time.getGameTimeInMs();
-        entity.saveComponent(fleeOnHitComponent);
+        FleeComponent fleeComponent = new FleeComponent();
+        fleeComponent.instigator = event.getInstigator();
+        fleeComponent.timeWhenHit = time.getGameTimeInMs();
+        entity.saveComponent(fleeComponent);
         entity.send(new UpdateBehaviorEvent());
     }
 
 
     @ReceiveEvent(priority = EventPriority.PRIORITY_HIGH, components = FleeOnHitComponent.class)
-    public void onUpdateBehaviorFlee(UpdateBehaviorEvent event, EntityRef entity, FleeOnHitComponent fleeOnHitComponent) {
-        if (fleeOnHitComponent.instigator != null) {
+    public void onUpdateBehaviorFlee(UpdateBehaviorEvent event, EntityRef entity, FleeOnHitComponent fleeOnHitComponent, FleeComponent fleeComponent) {
+        if (fleeComponent.instigator != null) {
             event.consume();
 
             // Start fleeing behavior, when a hit that is recorded is recent
             BehaviorComponent behaviorComponent = entity.getComponent(BehaviorComponent.class);
-            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:fleeOnHit", BehaviorTree.class).get();
+            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:flee", BehaviorTree.class).get();
             logger.info("Changed behavior to Flee");
             // Increase speed by multiplier factor
             CharacterMovementComponent characterMovementComponent = entity.getComponent(CharacterMovementComponent.class);

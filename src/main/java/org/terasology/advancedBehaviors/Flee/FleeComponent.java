@@ -13,18 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.advancedBehaviors.FleeInProximity;
+package org.terasology.advancedBehaviors.Flee;
 
 import org.terasology.entitySystem.Component;
 import org.terasology.entitySystem.entity.EntityRef;
 
 /**
- * If this component is attached to an NPC entity it will exhibit the flee-in-proximity behavior
- * When a player enters a nearby area defined by FindNearbyPlayers, the NPC will run with a speed of
- * `speedMultiplier`*normalSpeed to flee from the player until the player escapes the NPC's range.
- * When the NPC reaches a greater distance, it stops.
+ * This component is used by the FleeOnHit and FleeInProximity module to allow an
+ * NPC to exhibit the Flee behavior
  */
-public class FleeInProximityComponent implements Component {
-    // Speed factor by which attack speed increases
-    public float speedMultiplier = 1.2f;
+public class FleeComponent implements Component {
+    // Minimum distance from instigator after which the NPC will stop 'flee'ing
+    public float minDistance = 10f;
+    // Entity to run away from
+    public EntityRef instigator;
+    // Time of flee start
+    public long timeWhenHit;
 }
