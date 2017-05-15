@@ -22,8 +22,8 @@ import org.terasology.entitySystem.entity.EntityRef;
 import java.util.List;
 
 /**
- * If this component is attached to a WildAnimal entity it will constantly look
- * around for nearby entities that enter a given radius.
+ * If this component is attached to an NPC entity it will constantly look
+ * around for nearby players that enter a given radius.
  */
 public class FindNearbyPlayersComponent implements Component {
     public float searchRadius = 10f;

@@ -60,7 +60,7 @@ public class FleeOnHitSystem extends BaseComponentSystem {
 
             // Start fleeing behavior, when a hit that is recorded is recent
             BehaviorComponent behaviorComponent = entity.getComponent(BehaviorComponent.class);
-            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:flee", BehaviorTree.class).get();
+            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:fleeOnHit", BehaviorTree.class).get();
             logger.info("Changed behavior to Flee");
             // Increase speed by multiplier factor
             CharacterMovementComponent characterMovementComponent = entity.getComponent(CharacterMovementComponent.class);
