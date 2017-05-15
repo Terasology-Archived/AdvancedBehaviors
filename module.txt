@@ -3,7 +3,13 @@
     "version" : "0.1.0-SNAPSHOT",
     "author" : "nihal111",
     "displayName" : "AdvancedBehaviors",
-    "description" : "",
-    "dependencies" : [],
-    "serverSideOnly" : false
+    "description" : "Contains behavior trees and logic for NPCs",
+    "dependencies" : [{
+            "id" : "Core",
+            "minVersion" : "1.0.0"
+        },{
+            "id" : "Pathfinding",
+            "minVersion" : "0.2.0"
+        }],
+    "isServerSideOnly" : false
 }
