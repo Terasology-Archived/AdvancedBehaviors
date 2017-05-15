@@ -45,7 +45,7 @@ public class StrayIfIdleSystem extends BaseComponentSystem {
         BehaviorComponent behaviorComponent = entity.getComponent(BehaviorComponent.class);
         // Restore speed to normal
         CharacterMovementComponent characterMovementComponent = entity.getComponent(CharacterMovementComponent.class);
-        characterMovementComponent.speedMultiplier = strayIfIdleComponent.defaultSpeedMultipler;
+        characterMovementComponent.speedMultiplier = strayIfIdleComponent.defaultSpeedMultiplier;
         entity.saveComponent(characterMovementComponent);
         // Change behavior to "stray"
         behaviorComponent.tree = assetManager.getAsset("Pathfinding:stray", BehaviorTree.class).get();

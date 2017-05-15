@@ -22,5 +22,5 @@ import org.terasology.entitySystem.Component;
  */
 public class StrayIfIdleComponent implements Component {
     /* Speed Multiplier for default stray mode */
-    public float defaultSpeedMultipler = 0.3f;
+    public float defaultSpeedMultiplier = 0.3f;
 }
