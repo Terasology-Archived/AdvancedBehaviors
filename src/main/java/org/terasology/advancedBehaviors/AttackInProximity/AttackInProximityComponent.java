@@ -18,10 +18,10 @@ package org.terasology.advancedBehaviors.AttackInProximity;
 import org.terasology.entitySystem.Component;
 
 /**
- * If this component is attached to a WildAnimal entity it will exhibit the attack-on-hit behavior
- * When hit, the animal will run with a speed of `speedMultiplier`*normalSpeed to attack the instigator
- * until it is at a greater distance than `maxDistance` from the damage inflicter- `instigator`.
- * When it reaches a greater distance, the instigator is set to null, and the animal stops.
+ * If this component is attached to an NPC entity it will exhibit the attack-in=proximity behavior
+ * When a player enters a nearby area defined by FindNearbyPlayers, the NPC will run with a speed of
+ * `speedMultiplier`*normalSpeed to attack the player until the player escapes the NPC's range.
+ * When the player reaches a greater distance, the NPC stops.
  */
 public class AttackInProximityComponent implements Component {
     // Speed factor by which attack speed increases

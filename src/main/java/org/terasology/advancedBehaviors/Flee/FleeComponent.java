@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.advancedBehaviors.FindNearbyPlayers;
-
+package org.terasology.advancedBehaviors.Flee;
 
 import org.terasology.entitySystem.Component;
 import org.terasology.entitySystem.entity.EntityRef;
 
-import java.util.List;
-
 /**
- * If this component is attached to an NPC entity it will constantly look
- * around for nearby players that enter a given radius.
+ * This component is used by the FleeOnHit and FleeInProximity module to allow an
+ * NPC to exhibit the Flee behavior
  */
-public class FindNearbyPlayersComponent implements Component {
-    public float searchRadius = 10f;
-    public List<EntityRef> charactersWithinRange;
+public class FleeComponent implements Component {
+    // Minimum distance from instigator after which the NPC will stop 'flee'ing
+    public float minDistance = 10f;
+    // Entity to run away from
+    public EntityRef instigator;
+    // Time of flee start
+    public long timeWhenHit;
 }

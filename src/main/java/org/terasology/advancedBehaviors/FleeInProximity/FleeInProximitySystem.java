@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.advancedBehaviors.AttackInProximity;
+package org.terasology.advancedBehaviors.FleeInProximity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.terasology.advancedBehaviors.FindNearbyPlayers.FindNearbyPlayersComponent;
+import org.terasology.advancedBehaviors.Flee.FleeComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.engine.Time;
@@ -34,34 +35,34 @@ import org.terasology.pathfinding.components.FollowComponent;
 import org.terasology.registry.In;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
-public class AttackInProximitySystem extends BaseComponentSystem {
-    private static final Logger logger = LoggerFactory.getLogger(AttackInProximitySystem.class);
+public class FleeInProximitySystem extends BaseComponentSystem {
+    private static final Logger logger = LoggerFactory.getLogger(FleeInProximitySystem.class);
 
     @In
     private Time time;
     @In
     private AssetManager assetManager;
 
-    @ReceiveEvent(priority = EventPriority.PRIORITY_HIGH, components = AttackInProximityComponent.class)
-    public void onUpdateBehaviorAttack(UpdateBehaviorEvent event, EntityRef entity, AttackInProximityComponent attackInProximityComponent, FindNearbyPlayersComponent findNearbyPlayersComponent) {
+    @ReceiveEvent(priority = EventPriority.PRIORITY_HIGH, components = FleeInProximityComponent.class)
+    public void onUpdateBehaviorAttack(UpdateBehaviorEvent event, EntityRef entity, FleeInProximityComponent fleeInProximityComponent, FindNearbyPlayersComponent findNearbyPlayersComponent) {
         if (findNearbyPlayersComponent.charactersWithinRange != null && findNearbyPlayersComponent.charactersWithinRange.size() > 0) {
             event.consume();
             EntityRef someCharacterWithinRange = findNearbyPlayersComponent.charactersWithinRange.get(0);
-            FollowComponent followComponent = new FollowComponent();
-            followComponent.entityToFollow = someCharacterWithinRange;
-            entity.addOrSaveComponent(followComponent);
+            FleeComponent fleeComponent = new FleeComponent();
+            fleeComponent.instigator = someCharacterWithinRange;
+            entity.addOrSaveComponent(fleeComponent);
             // Start hostile behavior, when an entity enters nearby
             BehaviorComponent behaviorComponent = entity.getComponent(BehaviorComponent.class);
-            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:hostileInProximity", BehaviorTree.class).get();
-            logger.info("Changed behavior to Hostile");
+            behaviorComponent.tree = assetManager.getAsset("AdvancedBehaviors:flee", BehaviorTree.class).get();
+            logger.info("Changed behavior to Flee");
             // Increase speed by multiplier factor
             CharacterMovementComponent characterMovementComponent = entity.getComponent(CharacterMovementComponent.class);
-            characterMovementComponent.speedMultiplier = attackInProximityComponent.speedMultiplier;
+            characterMovementComponent.speedMultiplier = fleeInProximityComponent.speedMultiplier;
             entity.saveComponent(characterMovementComponent);
             entity.saveComponent(behaviorComponent);
         } else {
-            if (entity.hasComponent(FollowComponent.class)) {
-                entity.removeComponent(FollowComponent.class);
+            if (entity.hasComponent(FleeComponent.class)) {
+                entity.removeComponent(FleeComponent.class);
             }
         }
     }

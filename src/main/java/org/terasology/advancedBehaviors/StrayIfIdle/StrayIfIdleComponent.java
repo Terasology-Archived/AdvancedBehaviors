@@ -18,7 +18,7 @@ package org.terasology.advancedBehaviors.StrayIfIdle;
 import org.terasology.entitySystem.Component;
 
 /**
- * If this component is attached to a WildAnimal entity it will exhibit the stray behavior when idle.
+ * If this component is attached to an NPC entity it will exhibit the stray behavior when idle.
  */
 public class StrayIfIdleComponent implements Component {
     // Speed Multiplier for default stray mode
