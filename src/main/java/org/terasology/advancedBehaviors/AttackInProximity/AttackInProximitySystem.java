@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.terasology.advancedBehaviors.FindNearbyPlayers.FindNearbyPlayersComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
-import org.terasology.engine.Time;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.EventPriority;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -37,8 +36,6 @@ import org.terasology.registry.In;
 public class AttackInProximitySystem extends BaseComponentSystem {
     private static final Logger logger = LoggerFactory.getLogger(AttackInProximitySystem.class);
 
-    @In
-    private Time time;
     @In
     private AssetManager assetManager;
 

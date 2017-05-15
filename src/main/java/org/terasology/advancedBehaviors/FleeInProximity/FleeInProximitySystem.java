@@ -21,7 +21,6 @@ import org.terasology.advancedBehaviors.FindNearbyPlayers.FindNearbyPlayersCompo
 import org.terasology.advancedBehaviors.Flee.FleeComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
-import org.terasology.engine.Time;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.EventPriority;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -31,15 +30,12 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.behavior.BehaviorComponent;
 import org.terasology.logic.behavior.asset.BehaviorTree;
 import org.terasology.logic.characters.CharacterMovementComponent;
-import org.terasology.pathfinding.components.FollowComponent;
 import org.terasology.registry.In;
 
 @RegisterSystem(RegisterMode.AUTHORITY)
 public class FleeInProximitySystem extends BaseComponentSystem {
     private static final Logger logger = LoggerFactory.getLogger(FleeInProximitySystem.class);
 
-    @In
-    private Time time;
     @In
     private AssetManager assetManager;
 
@@ -50,6 +46,7 @@ public class FleeInProximitySystem extends BaseComponentSystem {
             EntityRef someCharacterWithinRange = findNearbyPlayersComponent.charactersWithinRange.get(0);
             FleeComponent fleeComponent = new FleeComponent();
             fleeComponent.instigator = someCharacterWithinRange;
+            fleeComponent.minDistance = fleeInProximityComponent.minDistance;
             entity.addOrSaveComponent(fleeComponent);
             // Start hostile behavior, when an entity enters nearby
             BehaviorComponent behaviorComponent = entity.getComponent(BehaviorComponent.class);

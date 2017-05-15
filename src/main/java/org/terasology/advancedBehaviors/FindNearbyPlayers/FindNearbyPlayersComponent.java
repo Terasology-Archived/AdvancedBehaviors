@@ -26,6 +26,8 @@ import java.util.List;
  * around for nearby players that enter a given radius.
  */
 public class FindNearbyPlayersComponent implements Component {
+    /* Search radius for finding nearby players */
     public float searchRadius = 10f;
+    /* List of player entities nearby */
     public List<EntityRef> charactersWithinRange;
 }

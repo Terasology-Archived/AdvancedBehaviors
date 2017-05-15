@@ -25,6 +25,8 @@ import org.terasology.entitySystem.entity.EntityRef;
  * When the NPC reaches a greater distance, it stops.
  */
 public class FleeInProximityComponent implements Component {
-    // Speed factor by which attack speed increases
+    /* Minimum distance from instigator after which the NPC will stop 'flee'ing */
+    public float minDistance = 10f;
+    /* Speed factor by which attack speed increases */
     public float speedMultiplier = 1.2f;
 }

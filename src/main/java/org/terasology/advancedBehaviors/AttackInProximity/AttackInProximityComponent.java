@@ -24,6 +24,6 @@ import org.terasology.entitySystem.Component;
  * When the player reaches a greater distance, the NPC stops.
  */
 public class AttackInProximityComponent implements Component {
-    // Speed factor by which attack speed increases
+    /* Speed factor by which attack speed increases */
     public float speedMultiplier = 1.2f;
 }
