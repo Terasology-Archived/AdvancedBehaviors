@@ -23,10 +23,8 @@ import org.terasology.entitySystem.entity.EntityRef;
  * NPC to exhibit the Flee behavior
  */
 public class FleeComponent implements Component {
-    // Minimum distance from instigator after which the NPC will stop 'flee'ing
+    /* Minimum distance from instigator after which the NPC will stop 'flee'ing */
     public float minDistance = 10f;
-    // Entity to run away from
+    /* Entity to run away from */
     public EntityRef instigator;
-    // Time of flee start
-    public long timeWhenHit;
 }

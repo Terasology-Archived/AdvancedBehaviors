@@ -25,6 +25,8 @@ import org.terasology.entitySystem.entity.EntityRef;
  * When it reaches a safe distance the instigator is set to null.
  */
 public class FleeOnHitComponent implements Component {
-    // Speed factor by which flee speed increases
+    /* Minimum distance from instigator after which the NPC will stop 'flee'ing */
+    public float minDistance = 10f;
+    /* Speed factor by which flee speed increases */
     public float speedMultiplier = 1.2f;
 }

@@ -21,6 +21,6 @@ import org.terasology.entitySystem.Component;
  * If this component is attached to an NPC entity it will exhibit the stray behavior when idle.
  */
 public class StrayIfIdleComponent implements Component {
-    // Speed Multiplier for default stray mode
-    public float defaultSpeedMultipler = 0.3f;
+    /* Speed Multiplier for default stray mode */
+    public float defaultSpeedMultiplier = 0.3f;
 }

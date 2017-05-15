@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.terasology.advancedBehaviors.Flee.FleeComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
-import org.terasology.engine.Time;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.entitySystem.event.EventPriority;
 import org.terasology.entitySystem.event.ReceiveEvent;
@@ -38,8 +37,6 @@ public class FleeOnHitSystem extends BaseComponentSystem {
     private static final Logger logger = LoggerFactory.getLogger(FleeOnHitSystem.class);
 
     @In
-    private Time time;
-    @In
     private AssetManager assetManager;
 
     /**
@@ -48,8 +45,8 @@ public class FleeOnHitSystem extends BaseComponentSystem {
     @ReceiveEvent(components = FleeOnHitComponent.class)
     public void onDamage(OnDamagedEvent event, EntityRef entity, FleeOnHitComponent fleeOnHitComponent) {
         FleeComponent fleeComponent = new FleeComponent();
+        fleeComponent.minDistance = fleeOnHitComponent.minDistance;
         fleeComponent.instigator = event.getInstigator();
-        fleeComponent.timeWhenHit = time.getGameTimeInMs();
         entity.saveComponent(fleeComponent);
         entity.send(new UpdateBehaviorEvent());
     }
