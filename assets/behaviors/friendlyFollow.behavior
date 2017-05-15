@@ -1,0 +1,65 @@
+{
+  "model": {
+    "nodeType": "engine:RepeatNode",
+    "nodeId": 0,
+    "node": {
+      "child": {
+        "nodeType": "engine:WrapperNode",
+        "nodeId": 1,
+        "node": {
+          "child": {
+            "nodeType": "engine:SequenceNode",
+            "nodeId": 2,
+            "node": {
+              "children": [
+                {
+                  "nodeType": "Pathfinding:ContinueFollowingCheckNode",
+                  "nodeId": 3,
+                  "node": {
+                    "minDistance": 0.90000004,
+                    "maxDistance": 100.0
+                  }
+                },
+                {
+                  "nodeType": "engine:WrapperNode",
+                  "nodeId": 4,
+                  "node": {
+                    "child": {
+                      "nodeType": "engine:ParallelNode",
+                      "nodeId": 5,
+                      "node": {
+                        "successPolicy": "RequireAll",
+                        "failurePolicy": "RequireOne",
+                        "children": [
+                          {
+                            "nodeType": "engine:RepeatNode",
+                            "nodeId": 6,
+                            "node": {
+                              "child": {
+                                "nodeType": "Pathfinding:ContinueFollowingCheckNode",
+                                "nodeId": 7,
+                                "node": {
+                                  "minDistance": 1.2,
+                                  "maxDistance": 100.0
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "nodeType": "Pathfinding:FollowNode",
+                            "nodeId": 8,
+                            "node": {}
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
