@@ -17,7 +17,6 @@ package org.terasology.advancedBehaviors.Flee;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.advancedBehaviors.FleeOnHit.FleeOnHitComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.entitySystem.entity.EntityRef;
 import org.terasology.logic.behavior.tree.Node;
@@ -25,6 +24,7 @@ import org.terasology.logic.behavior.tree.Status;
 import org.terasology.logic.behavior.tree.Task;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.math.geom.Vector3f;
+import org.terasology.pathfinding.components.FleeComponent;
 
 public class CheckFleeStopNode extends Node {
     private static final Logger logger = LoggerFactory.getLogger(CheckFleeStopNode.class);

@@ -25,7 +25,7 @@
                       "nodeType": "engine:LookupNode",
                       "nodeId": 4,
                       "node": {
-                        "tree": "Pathfinding:doRandomMove"
+                        "tree": "Pathfinding:doRandomMoveAwayFromPlayer"
                       }
                     }
                   }
