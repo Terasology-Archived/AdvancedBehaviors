@@ -17,7 +17,7 @@ package org.terasology.advancedBehaviors.FleeOnHit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.terasology.advancedBehaviors.Flee.FleeComponent;
+import org.terasology.pathfinding.components.FleeComponent;
 import org.terasology.advancedBehaviors.UpdateBehaviorEvent;
 import org.terasology.assets.management.AssetManager;
 import org.terasology.entitySystem.entity.EntityRef;
