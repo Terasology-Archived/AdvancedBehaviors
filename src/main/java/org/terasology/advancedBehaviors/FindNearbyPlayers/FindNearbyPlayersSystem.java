@@ -25,6 +25,7 @@ import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterMode;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.entitySystem.systems.UpdateSubscriberSystem;
+import org.terasology.logic.characters.AliveCharacterComponent;
 import org.terasology.logic.location.LocationComponent;
 import org.terasology.math.geom.Vector3f;
 import org.terasology.network.ClientComponent;
@@ -45,7 +46,6 @@ public class FindNearbyPlayersSystem extends BaseComponentSystem implements Upda
 
     @Override
     public void update(float delta) {
-        // Iterate through all the Breaking blocks
         for (EntityRef entity : entityManager.getEntitiesWith(FindNearbyPlayersComponent.class)) {
             Vector3f actorPosition = entity.getComponent(LocationComponent.class).getWorldPosition();
             FindNearbyPlayersComponent findNearbyPlayersComponent = entity.getComponent(FindNearbyPlayersComponent.class);
@@ -57,6 +57,10 @@ public class FindNearbyPlayersSystem extends BaseComponentSystem implements Upda
             for (EntityRef client : clients) {
                 ClientComponent clientComponent = client.getComponent(ClientComponent.class);
                 EntityRef character = clientComponent.character;
+                AliveCharacterComponent aliveCharacterComponent = character.getComponent(AliveCharacterComponent.class);
+                if (aliveCharacterComponent == null) {
+                    continue;
+                }
                 LocationComponent locationComponent = character.getComponent(LocationComponent.class);
                 if (locationComponent == null) {
                     continue;
