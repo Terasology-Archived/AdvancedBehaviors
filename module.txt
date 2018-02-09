@@ -1,15 +1,12 @@
 {
     "id" : "AdvancedBehaviors",
-    "version" : "0.1.0-SNAPSHOT",
+    "version" : "0.1.1-SNAPSHOT",
     "author" : "nihal111",
     "displayName" : "AdvancedBehaviors",
     "description" : "Contains behavior trees and logic for NPCs",
-    "dependencies" : [{
-            "id" : "Core",
-            "minVersion" : "1.0.0"
-        },{
-            "id" : "Pathfinding",
-            "minVersion" : "0.2.0"
-        }],
+    "dependencies" : [
+        {"id" : "Core", "minVersion" : "2.0.0"},
+        {"id" : "Pathfinding", "minVersion" : "0.2.0"}
+    ],
     "isServerSideOnly" : false
 }
